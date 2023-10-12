@@ -2203,7 +2203,7 @@ public:
 	static void soundHotbarShootmodeMovement();
 };
 
-API extern Player* players[MAXPLAYERS];
+extern Player* players[MAXPLAYERS];
 //In the process of switching from the old entity player array, all of the old uses of player need to be hunted down and then corrected to account for the new array.
 //So, search for the comment:
 //TODO: PLAYERSWAP

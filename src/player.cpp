@@ -30,7 +30,7 @@
 #include "nintendo/baronynx.hpp"
 #endif
 
-API Player* players[MAXPLAYERS] = { nullptr };
+Player* players[MAXPLAYERS] = { nullptr };
 PlayerSettings_t playerSettings[MAXPLAYERS];
 Entity* selectedEntity[MAXPLAYERS] = { nullptr };
 Sint32 mousex = 0, mousey = 0;
