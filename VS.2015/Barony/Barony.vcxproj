@@ -1215,6 +1215,7 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%</Command>
     <ClCompile Include="..\..\src\monster_succubus.cpp" />
     <ClCompile Include="..\..\src\monster_troll.cpp" />
     <ClCompile Include="..\..\src\monster_vampire.cpp" />
+    <ClCompile Include="..\..\src\mumble.cpp" />
     <ClCompile Include="..\..\src\net.cpp" />
     <ClCompile Include="..\..\src\objects.cpp" />
     <ClCompile Include="..\..\src\opengl.cpp" />
@@ -1277,6 +1278,7 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%</Command>
     <ClInclude Include="..\..\src\menu.hpp" />
     <ClInclude Include="..\..\src\messages.hpp" />
     <ClInclude Include="..\..\src\monster.hpp" />
+    <ClInclude Include="..\..\src\mumble.hpp" />
     <ClInclude Include="..\..\src\net.hpp" />
     <ClInclude Include="..\..\src\player.hpp" />
     <ClInclude Include="..\..\src\prng.hpp" />

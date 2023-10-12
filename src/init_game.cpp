@@ -38,6 +38,7 @@
 #include "ui/GameUI.hpp"
 #include "ui/Text.hpp"
 #include "ui/MainMenu.hpp"
+#include "mumble.hpp"
 
 #include <thread>
 #include <future>
@@ -316,6 +317,8 @@ int initGame()
 		doLoadingScreen();
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
+	updateLoadingScreen(99);
+	initMumble();
 	updateLoadingScreen(100);
 	doLoadingScreen();
 	std::this_thread::sleep_for(std::chrono::milliseconds(1));
