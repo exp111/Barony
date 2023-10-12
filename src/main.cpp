@@ -233,7 +233,7 @@ string lastname;
 
 // net stuff
 int numplayers = 0;
-int clientnum = 0;
+API int clientnum = 0;
 int multiplayer = 0;
 SteamGlobalStat_t g_SteamAPIGlobalStats[1] =
 {

@@ -59,7 +59,7 @@ extern std::unordered_map<int, Uint32> safePacketsReceivedMap[MAXPLAYERS];
 extern bool receivedclientnum;
 
 extern Sint32 numplayers;
-extern Sint32 clientnum;
+API extern Sint32 clientnum;
 extern bool intro;
 extern int introstage;
 extern bool gamePaused;

@@ -939,4 +939,6 @@ char* getTimeAndDateFormatted(time_t t, char* buf, size_t size);
 #undef near
 #endif
 
+#define API __declspec(dllexport)
+
 #define VERTEX_ARRAYS_ENABLED
