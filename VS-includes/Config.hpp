@@ -9,8 +9,8 @@
 
 #define BASE_DATA_DIR "./"
 
+#define BARONY_SUPER_MULTIPLAYER
 //#define DEBUG_ACHIEVEMENTS
-//#define DEBUG_EVENT_TIMERS
 
 #ifdef BARONY_DRM_FREE
 
