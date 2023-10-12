@@ -9724,7 +9724,7 @@ void doNewGame(bool makeHighscore) {
 			if (!verifyMapHash(map.filename, checkMapHash))
 			{
 				conductGameChallenges[CONDUCT_MODDED] = 1;
-				Mods::disableSteamAchievements = true;
+				Mods::disableSteamAchievements = false;
 			}
 		}
 		else
@@ -9736,7 +9736,7 @@ void doNewGame(bool makeHighscore) {
 				if (!verifyMapHash(fullMapName.c_str(), checkMapHash))
 				{
 					conductGameChallenges[CONDUCT_MODDED] = 1;
-					Mods::disableSteamAchievements = true;
+					Mods::disableSteamAchievements = false;
 				}
 			}
 			else
@@ -10047,7 +10047,7 @@ void doNewGame(bool makeHighscore) {
 			if (!verifyMapHash(map.filename, checkMapHash))
 			{
 				conductGameChallenges[CONDUCT_MODDED] = 1;
-				Mods::disableSteamAchievements = true;
+				Mods::disableSteamAchievements = false;
 			}
 		}
 		else
@@ -10059,7 +10059,7 @@ void doNewGame(bool makeHighscore) {
 				if (!verifyMapHash(fullMapName.c_str(), checkMapHash))
 				{
 					conductGameChallenges[CONDUCT_MODDED] = 1;
-					Mods::disableSteamAchievements = true;
+					Mods::disableSteamAchievements = false;
 				}
 			}
 			else
@@ -13446,7 +13446,7 @@ void buttonGamemodsStartModdedGame(button_t* my)
 //
 //	if ( physfsIsMapLevelListModded() )
 //	{
-//		Mods::disableSteamAchievements = true;
+//		Mods::disableSteamAchievements = false;
 //	}
 //	else
 //	{

@@ -8077,20 +8077,20 @@ void Mods::verifyAchievements(const char* fullpath, bool ignoreBaseFolder)
 {
 	if ( physfsIsMapLevelListModded() )
 	{
-		disableSteamAchievements = true;
+		disableSteamAchievements = false;
 	}
 
 	if ( PHYSFS_getRealDir("/data/gameplaymodifiers.json") )
 	{
-		disableSteamAchievements = true;
+		disableSteamAchievements = false;
 	}
 	else if ( PHYSFS_getRealDir("/data/monstercurve.json") )
 	{
-		disableSteamAchievements = true;
+		disableSteamAchievements = false;
 	}
 	else if ( !verifyMapFiles(fullpath, ignoreBaseFolder) )
 	{
-		disableSteamAchievements = true;
+		disableSteamAchievements = false;
 	}
 }
 
