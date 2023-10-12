@@ -73,7 +73,7 @@ void charToWide(char original[], wchar_t converted[], int length) {
 	}
 }
 
-void updateMumble(real_t x, real_t y, real_t yaw, char name[128], char status[16]) {
+void updateMumble(real_t z, real_t x, real_t y, real_t horiz_angle, real_t vert_angle, char name[128], char status[16]) {
 	if (!lm)
 		return;
 
@@ -91,33 +91,22 @@ void updateMumble(real_t x, real_t y, real_t yaw, char name[128], char status[16
 	//
 	// 1 unit = 1 meter
 
-	// Unit vector pointing out of the avatar's eyes aka "At"-vector.
-	lm->fAvatarFront[0] = cos(yaw); // yaw is a radian
-	lm->fAvatarFront[1] = sin(yaw);
-	lm->fAvatarFront[2] = 0.0f;
-
-	// Unit vector pointing out of the top of the avatar's head aka "Up"-vector (here Top points straight up).
-	lm->fAvatarTop[0] = 0.0f;
-	lm->fAvatarTop[1] = 1.0f;
-	lm->fAvatarTop[2] = 0.0f;
-
-	// Position of the avatar (here standing slightly off the origin)
-	lm->fAvatarPosition[0] = y / 4.0f; // 8.0 is 1 block length, and a block seems about 2 meters
-	lm->fAvatarPosition[1] = 0.0f;
-	lm->fAvatarPosition[2] = x / 4.0f;
-
 	// Same as avatar but for the camera.
-	lm->fCameraPosition[0] = lm->fAvatarPosition[0]; //this is an fps so camera should be same as avatar
-	lm->fCameraPosition[1] = lm->fAvatarPosition[1];
-	lm->fCameraPosition[2] = lm->fAvatarPosition[2];
+	lm->fCameraPosition[0] = lm->fAvatarPosition[0] = x; //this is an fps so camera should be same as avatar
+	lm->fCameraPosition[1] = lm->fAvatarPosition[1] = y;
+	lm->fCameraPosition[2] = lm->fAvatarPosition[2] = z;
 
-	lm->fCameraFront[0] = lm->fAvatarFront[0];
-	lm->fCameraFront[1] = lm->fAvatarFront[1];
-	lm->fCameraFront[2] = lm->fAvatarFront[2];
+	double dirY = -sin(vert_angle);
+	float  magnitude = sqrt(1 + (dirY * dirY));
 
-	lm->fCameraTop[0] = lm->fAvatarTop[0];
-	lm->fCameraTop[1] = lm->fAvatarTop[1];
-	lm->fCameraTop[2] = lm->fAvatarTop[2];
+	lm->fCameraFront[0] = lm->fAvatarFront[0] = sin(horiz_angle) / magnitude;
+	lm->fCameraFront[1] = lm->fAvatarFront[1] = dirY / magnitude;
+	lm->fCameraFront[2] = lm->fAvatarFront[2] = cos(horiz_angle) / magnitude;
+
+	// Axis - Character seems to be about 0.6 meters tall
+	lm->fCameraTop[0] = lm->fAvatarTop[0] = 0;
+	lm->fCameraTop[1] = lm->fAvatarTop[1] = 0.6;
+	lm->fCameraTop[2] = lm->fAvatarTop[2] = 0;
 
 	wchar_t convertedName[256] = {};
 	charToWide(name, convertedName, 128);

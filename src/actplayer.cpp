@@ -98,7 +98,9 @@ void manageMumbleLink(Entity* my)
 	}
 
 	updateMumble(0.0, 0.0, 0.0, stats[PLAYER_NUM]->name, " Dead");*/
-	updateMumble(my->x, my->y, my->yaw, stats[PLAYER_NUM]->name, "");
+	auto player = players[clientnum];
+	auto cam = player->camera();
+	updateMumble(cam.x, cam.y, cam.z, cam.ang, cam.vang, stats[clientnum]->name, "");
 }
 
 void actDeathCam(Entity* my)
