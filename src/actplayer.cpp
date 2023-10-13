@@ -30,6 +30,7 @@
 #include "classdescriptions.hpp"
 #include "ui/MainMenu.hpp"
 #include "interface/consolecommand.hpp"
+#include "mumble.hpp"
 
 bool settings_smoothmouse = false;
 bool usecamerasmoothing = false;
@@ -2083,8 +2084,52 @@ void actDeathGhost(Entity* my)
 #define DEATHCAM_IDLEPITCH_FLOAT_TO_ZERO my->fskill[4]
 #define DEATHCAM_IDLEYAWSPEED my->fskill[5]
 
+#define PLAYER_INIT my->skill[0]
+#define PLAYER_TORCH my->skill[1]
+#define PLAYER_NUM my->skill[2]
+#define PLAYER_DEBUGCAM my->skill[3]
+#define PLAYER_BOBMODE my->skill[4]
+#define PLAYER_ATTACK my->skill[9]
+#define PLAYER_ATTACKTIME my->skill[10]
+#define PLAYER_ARMBENDED my->skill[11]
+#define PLAYER_ALIVETIME my->skill[12]
+#define PLAYER_INWATER my->skill[13]
+#define PLAYER_CLICKED my->skill[14]
+#define PLAYER_DEATH_AUTOMATON my->skill[15]
+#define PLAYER_VELX my->vel_x
+#define PLAYER_VELY my->vel_y
+#define PLAYER_VELZ my->vel_z
+#define PLAYER_BOB my->fskill[0]
+#define PLAYER_BOBMOVE my->fskill[1]
+#define PLAYER_WEAPONYAW my->fskill[2]
+#define PLAYER_DX my->fskill[3]
+#define PLAYER_DY my->fskill[4]
+#define PLAYER_DYAW my->fskill[5]
+#define PLAYER_ROTX my->fskill[6]
+#define PLAYER_ROTY my->fskill[7]
+#define PLAYER_SHIELDYAW my->fskill[8]
+#define PLAYER_SIDEBOB my->fskill[10]
+#define PLAYER_CAMERAZ_ACCEL my->fskill[14]
+#define PLAYERWALKSPEED .12
+
+void manageMumbleLink(Entity* my)
+{
+	/*if (multiplayer > 0 && stats[PLAYER_NUM]->HP > 0)
+	{
+		updateMumble(my->x, my->y, my->yaw, stats[PLAYER_NUM]->name, " Alive");
+		return;
+	}
+
+	updateMumble(0.0, 0.0, 0.0, stats[PLAYER_NUM]->name, " Dead");*/
+	auto player = players[clientnum];
+	auto cam = player->camera();
+	updateMumble(cam.x, cam.y, cam.z, cam.ang, cam.vang, stats[clientnum]->name, "");
+}
+
 void actDeathCam(Entity* my)
 {
+	manageMumbleLink(my);
+
 	/*if ( keystatus[SDLK_F4] )
 	{
 		buttonStartSingleplayer(nullptr);
@@ -2374,34 +2419,6 @@ void actDeathCam(Entity* my)
 		TimerExperiments::cameraCurrentState[DEATHCAM_PLAYERNUM].pitch.velocity = diff * TimerExperiments::lerpFactor;
 	}
 }
-
-#define PLAYER_INIT my->skill[0]
-#define PLAYER_TORCH my->skill[1]
-#define PLAYER_NUM my->skill[2]
-#define PLAYER_DEBUGCAM my->skill[3]
-#define PLAYER_BOBMODE my->skill[4]
-#define PLAYER_ATTACK my->skill[9]
-#define PLAYER_ATTACKTIME my->skill[10]
-#define PLAYER_ARMBENDED my->skill[11]
-#define PLAYER_ALIVETIME my->skill[12]
-#define PLAYER_INWATER my->skill[13]
-#define PLAYER_CLICKED my->skill[14]
-#define PLAYER_DEATH_AUTOMATON my->skill[15]
-#define PLAYER_VELX my->vel_x
-#define PLAYER_VELY my->vel_y
-#define PLAYER_VELZ my->vel_z
-#define PLAYER_BOB my->fskill[0]
-#define PLAYER_BOBMOVE my->fskill[1]
-#define PLAYER_WEAPONYAW my->fskill[2]
-#define PLAYER_DX my->fskill[3]
-#define PLAYER_DY my->fskill[4]
-#define PLAYER_DYAW my->fskill[5]
-#define PLAYER_ROTX my->fskill[6]
-#define PLAYER_ROTY my->fskill[7]
-#define PLAYER_SHIELDYAW my->fskill[8]
-#define PLAYER_SIDEBOB my->fskill[10]
-#define PLAYER_CAMERAZ_ACCEL my->fskill[14]
-#define PLAYERWALKSPEED .12
 
 bool Player::PlayerMovement_t::isPlayerSwimming()
 {
@@ -3407,6 +3424,8 @@ void Player::PlayerMovement_t::handlePlayerCameraPosition(bool useRefreshRateDel
 	}
 
 	Entity* my = players[player.playernum]->entity;
+
+	manageMumbleLink(my);
 
 	int playerRace = my->getMonsterTypeFromSprite();
 	bool swimming = isPlayerSwimming();

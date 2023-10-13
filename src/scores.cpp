@@ -3431,7 +3431,7 @@ void updatePlayerConductsInMainLoop()
 		if ( Mods::numCurrentModsLoaded >= 0 )
 		{
 			conductGameChallenges[CONDUCT_MODDED] = 1;
-			//Mods::disableSteamAchievements = true;
+			//Mods::disableSteamAchievements = false;
 		}
 	}
 
