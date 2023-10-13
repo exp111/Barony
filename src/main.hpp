@@ -10,6 +10,7 @@
 -------------------------------------------------------------------------------*/
 
 #pragma once
+#define BARONY_SUPER_MULTIPLAYER
 
 #ifdef __arm__
 typedef float real_t;
